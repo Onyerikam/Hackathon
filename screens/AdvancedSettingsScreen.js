@@ -48,6 +48,7 @@ class AdvancedSettingsScreen extends React.Component {
         const wifiEnabled = await WiFiService.isEnabledAsync();
         this.setState({ wifiEnabled });
     }
+
     fetchBluetoothStatus = async () => {
         const bluetoothEnabled = await BluetoothService.isEnabledAsync();
         this.setState({ bluetoothEnabled });
@@ -154,9 +155,9 @@ class AdvancedSettingsScreen extends React.Component {
             
     handleProxyToggle = async (value) => {
         if (value) {
-            await ProxyService.connectAsync();
+          await ProxyService.connectAsync();
         } else {
-            await ProxyService.disconnectAsync();
+          await ProxyService.disconnectAsync();
         }
         this.setState({ isProxyConnected: value });
     }
@@ -251,3 +252,76 @@ class AdvancedSettingsScreen extends React.Component {
         await WiFiScanFrequencyService.setFrequencyAsync(wifiScanFrequency);
         this.setState({ wifiScanFrequency });
     }
+
+    handleMaliciousNetworkDetectionToggle = async (value) => {
+        await MaliciousNetworkDetectionService.setEnabledAsync(value);
+        this.setState({ maliciousNetworkDetectionEnabled: value });
+    }
+        
+    handlePhishingNetworkDetectionToggle = async (value) => {
+        await PhishingNetworkDetectionService.setEnabledAsync(value);
+        this.setState({ phishingNetworkDetectionEnabled: value });
+    }
+
+    render() {
+        const {
+        wifiEnabled,
+        bluetoothEnabled,
+        isHotspotEnabled,
+        isVPNConnected,
+        isProxyConnected,
+        blockedWebsites,
+        darkModeEnabled,
+        wifiSleepSchedule,
+        wifiPrioritization,
+        dataUsageWarningThreshold,
+        wifiAutoConnectEnabled,
+        wifiAutoDisconnectEnabled,
+        dataSaverEnabled,
+        wifiQuickConnect,
+        wifiScanFrequency,
+        maliciousNetworkDetectionEnabled,
+        phishingNetworkDetectionEnabled,
+        } = this.state;
+        return (
+            <View>
+              <Text>WiFi:</Text>
+              <Switch value={wifiEnabled} onValueChange={this.handleWiFiToggle} />
+              <Text>Bluetooth:</Text>
+              <Switch value={bluetoothEnabled} onValueChange={this.handleBluetoothToggle} />
+              <Text>Hotspot:</Text>
+              <Switch value={isHotspotEnabled} onValueChange={this.handleHotspotToggle} />
+              <Text>VPN:</Text>
+              <Switch value={isVPNConnected} onValueChange={this.handleVPNToggle} />
+              <Text>Proxy:</Text>
+              <Switch value={isProxyConnected} onValueChange={this.handleProxyToggle} />
+              <Text>Blocked Websites:</Text>
+              <BlockedWebsitesList value={blockedWebsites} onChange={this.handleBlockedWebsitesChange} />
+              <Text>Dark Mode:</Text>
+              <Switch value={darkModeEnabled} onValueChange={this.handleDarkModeToggle} />
+              <Text>WiFi Sleep Schedule:</Text>
+              <WiFiSleepSchedule value={wifiSleepSchedule} onChange={this.handleWiFiSleepScheduleChange} />
+              <Text>WiFi Prioritization:</Text>
+              <WiFiPrioritizationList value={wifiPrioritization} onChange={this.handleWiFiPrioritizationChange} />
+              <Text>Data Usage Warning Threshold:</Text>
+              <DataUsageWarningThreshold value={dataUsageWarningThreshold} onChange={this.handleDataUsageWarningThresholdChange} />
+              <Text>WiFi Auto Connect:</Text>
+              <Switch value={wifiAutoConnectEnabled} onValueChange={this.handleWiFiAutoConnectToggle} />
+              <Text>WiFi Auto Disconnect:</Text>
+    <Switch value={wifiAutoDisconnectEnabled} onValueChange={this.handleWiFiAutoDisconnectToggle} />
+    <Text>Data Saver:</Text>
+    <Switch value={dataSaverEnabled} onValueChange={this.handleDataSaverToggle} />
+    <Text>WiFi Quick Connect:</Text>
+    <WiFiQuickConnectList value={wifiQuickConnect} onChange={this.handleWiFiQuickConnectChange} />
+    <Text>WiFi Scan Frequency:</Text>
+    <WiFiScanFrequency value={wifiScanFrequency} onChange={this.handleWiFiScanFrequencyChange} />
+    <Text>Malicious Network Detection:</Text>
+    <Switch value={maliciousNetworkDetectionEnabled} onValueChange={this.handleMaliciousNetworkDetectionToggle} />
+    <Text>Phishing Network Detection:</Text>
+    <Switch value={phishingNetworkDetectionEnabled} onValueChange={this.handlePhishingNetworkDetectionToggle} />
+    </View>
+    );
+    }
+    }
+
+export default AdvancedSettingsScreen;

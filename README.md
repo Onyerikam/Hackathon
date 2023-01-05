@@ -1,10 +1,9 @@
-### Hackathon
-```Made with 💖 [by] Onyerikam```
+# Hackathon
+```Made with 💖 [by] Onyerikam A.K.A ytechgod || Mr.Latitude```
 
-# About
+### About
 Hackathon is a mobile app made to hack network and render them useless. Both the owner and the network
 
-~~~How to hack~~~
 ### Getting Started
 ```$ git clone https://github.com/Onyerikam/Hackathon.git```
 ```$ cd Hackathon```
