@@ -1,10 +1,13 @@
 import React from 'react';
-import Routes from './routes';
+import { createAppContainer } from 'react-navigation';
+import AppNavigator from './routes';
+
+const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
 render() {
- return (
-  <Routes />
- );
- }
+return (
+<AppContainer />
+);
+}
 }

@@ -1,22 +1,16 @@
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import HomeScreen from './screens/HomeScreen';
 import ScanScreen from './screens/ScanScreen';
 import NetworkScreen from './screens/NetworkScreen';
 import AdvancedSettingsScreen from './screens/AdvancedSettingsScreen';
-import HotspotScreen from './screens/HotspotScreen';
-import VPNScreen from './screens/VPNScreen';
-import ProxyScreen from './screens/ProxyScreen';
 
-const AppNavigator = createStackNavigator({
-Home: HomeScreen,
-Scan: ScanScreen,
-Network: NetworkScreen,
-AdvancedSettings: AdvancedSettingsScreen,
-Hotspot: HotspotScreen,
-VPN: VPNScreen,
-Proxy: ProxyScreen,
+const AppNavigator = createBottomTabNavigator({
+   Home: HomeScreen,
+   Scan: ScanScreen,
+   Network: NetworkScreen,
+   AdvancedSettings: AdvancedSettingsScreen,
 });
 
 export default createAppContainer(AppNavigator);
